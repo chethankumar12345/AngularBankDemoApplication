@@ -1,0 +1,12 @@
+﻿<br />
+<a href="#!/BankCreate" class="btn btn-primary btn-group-lg active" role="button">Create New</a>
+<br />
+<br />
+<div ng-controller="BankListController" class="table-responsive">
+    <table style="width:400px;" class="table">
+        <thead><tr><th>Id</th><th>Name</th><th>IFSC</th><th></th></tr></thead>
+        <tbody><tr ng-repeat="bank in Banks"><td>{{bank.BankId}}</td><td>{{bank.Name}}</td><td>{{bank.IFSC}}</td><td><a href="#!/BankEdit/Id={{bank.BankId}}" class="btn btn-primary btn-sm active" role="button">Edit</a></td><td><span class="pull-right" title="Delete customer"> <i ng-click="deleteAccountType($event, bank.BankId)" class="glyphicon glyphicon-trash"></i> </span> </td></tr></tbody>
+    </table>
+    {{Message}}
+</div>
+

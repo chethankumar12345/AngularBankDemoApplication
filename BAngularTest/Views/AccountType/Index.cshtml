@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/AccountTypes/AccountTypeRouteConfig.js"></script>
+<script src="~/Scripts/AccountTypes/AccountTypeAccessor.js"></script>
+<script src="~/Scripts/AccountTypes/AccountTypeControllers.js"></script>
+
+<h2>Account Type</h2>
+
+
+<div ng-view></div>
+<div id="mydiv" data-ng-show="loading">
+    <img src="~/Images/ajax-loader.gif" class="ajax-loader" />
+</div>

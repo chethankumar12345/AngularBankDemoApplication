@@ -1,0 +1,41 @@
+﻿
+<div>Create</div>
+<br />
+<div ng-controller="CustomerEditController">
+    <form novalidate role="form" name="frmCustomer">
+        <input type="hidden" ng-model="customer.CustomerId" />
+        <table style="width:400px;">
+            <tr>
+                <td>Enter Customer Name :</td>
+                <td>
+                    <input type="text" name="Name" class="form-control input-sm" ng-model="customer.Name" style="width:200px;"  />
+                    <span class="help-inline" ng-show="error.Name">Enter Customer Name</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Mobile  :</td>
+                <td>
+                    <input type="text" name="IFSC" class="form-control input-sm" ng-model="customer.MobileNumber" style="width:200px;"  only-digits />
+                    <span class="help-inline" ng-show="error.MobileNumber">Enter Mobile Number</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Email Id :</td>
+                <td>
+                    <input type="text" name="IFSC" class="form-control input-sm" ng-model="customer.EmailId" style="width:200px;"  />
+                    <span class="help-inline" ng-show="error.EmailId">Enter Email Id</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div style="margin-top:10px;">
+                        <input type="submit" class="btn btn-success" ng-click="Save()" value="Save" />
+                        <input type="button" class="btn" style="margin-left:10px;" ng-click="Cancel()" value="Cancel" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+        {{Message}}
+    </form>
+</div>

@@ -1,0 +1,12 @@
+﻿<br />
+<a href="#!/AccountTypeCreate" class="btn btn-primary btn-group-lg active" role="button">Create New</a>
+<br />
+<br />
+<div ng-controller="AccountTypeListController" class="table-responsive">
+    <table style="width:400px;" class="table">
+        <thead><tr><th>Id</th><th>Name</th><th>Bank Name</th><th></th></tr></thead>
+        <tbody><tr ng-repeat="type in AccountTypes"><td>{{type.AccountTypeId}}</td><td>{{type.AccountType}}</td><td>{{type.Name}}</td><td><a href="#!/AccountTypeEdit/Id={{type.AccountTypeId}}" class="btn btn-primary btn-sm active" role="button">Edit</a></td><td><span class="pull-right" title="Delete customer"> <i ng-click="deleteAccountType($event, type.AccountTypeId)" class="glyphicon glyphicon-trash"></i> </span> </td></tr></tbody>
+    </table>
+    {{Message}}
+</div>
+

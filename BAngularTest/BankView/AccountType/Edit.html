@@ -1,0 +1,37 @@
+﻿<div>Edit</div>
+<br />
+<div ng-controller="AccountTypeEditController">
+    <form novalidate role="form" name="frmAccountType">
+        <input type="hidden" ng-model="account.AccountTypeId" />
+        <table style="width:400px;">
+            <tr>
+                <td>Enter Account Type :</td>
+                <td>
+                    <input type="text" name="AccountType" ng-model="account.AccountType" class="form-control input-sm" style="width:200px;" required-uniqueaccounttype="{{account.AccountType}}" />
+                    <span class="help-block" ng-if="frmAccountType.AccountType.$error.requiredUniqueaccounttype&& frmAccountType.AccountType.$dirty">Account Name already Present</span>
+                    <span class="help-inline" ng-show="AccountTypeRequired">Enter Account Type</span>
+                 </td>
+            </tr>
+            <tr>
+                <td>Select Bank :</td>
+                <td>
+
+                    <select ng-model="account.BankId" class="form-control input-sm" ng-options="obj.BankId as obj.Name for obj in Banks">
+                        <option value="">--Select Bank--</option>
+                    </select>
+                    <span class="help-inline" ng-show="BankRequired">Select Bank</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div style="margin-top:10px;">
+                        <input type="submit" class="btn btn-success" ng-click="Save()" value="Save" />
+                        <input type="button" class="btn" style="margin-left:10px;" ng-click="Cancel()" value="Cancel" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+        {{Message}}
+    </form>
+</div>

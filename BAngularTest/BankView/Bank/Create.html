@@ -1,0 +1,31 @@
+﻿
+<div>Create</div>
+<br />
+<div ng-controller="BankCreateController">
+    <form novalidate role="form" name="frmBank">
+        <table style="width:400px;">
+            <tr>
+                <td>Enter Bank Name :</td>
+                <td>
+                    <input type="text" name="Name" class="form-control input-sm" ng-model="bank.Name" style="width:200px;" required-uniquebank="{{bank.Name}}" />
+                    <span class="help-block" ng-if="frmBank.Name.$error.requiredUniquebank&& frmBank.Name.$dirty">Bank Name already Present</span>
+                    <span class="help-inline" ng-show="BankNameRequired">Enter Bank Name</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter IFSC :</td>
+                <td>
+                    <input type="text" name="IFSC" class="form-control input-sm" ng-model="bank.IFSC" style="width:200px;"  only-digits/>
+                    <span class="help-inline" ng-show="IFSCRequired">Enter IFSC Code</span>
+                 </td>
+            </tr>
+           
+            <tr><td></td><td><div style="margin-top:10px;">
+                                 <input type="submit" class="btn btn-success" ng-click="Save()" value="Save" />
+                                 <input type="button" class="btn" style="margin-left:10px;" ng-click="Cancel()" value="Cancel" />
+</div>
+                </td></tr>
+        </table>
+        {{Message}}
+    </form>
+</div>

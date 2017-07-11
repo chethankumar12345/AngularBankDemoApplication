@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAccountType">
+          <Key>
+            <PropertyRef Name="AccountTypeId" />
+          </Key>
+          <Property Name="AccountTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountType" Type="varchar" MaxLength="200" />
+          <Property Name="BankId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblBank">
+          <Key>
+            <PropertyRef Name="BankId" />
+          </Key>
+          <Property Name="BankId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="IFSC" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="MobileNumber" Type="char" MaxLength="10" />
+          <Property Name="EmailId" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="tblCustomerAccount">
+          <Key>
+            <PropertyRef Name="CustomerAccountId" />
+          </Key>
+          <Property Name="CustomerAccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="AccountTypeId" Type="int" />
+          <Property Name="JoinDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblTransaction">
+          <Key>
+            <PropertyRef Name="TransationId" />
+          </Key>
+          <Property Name="TransationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerAccountId" Type="int" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="TransactionDate" Type="datetime" />
+          <Property Name="TransactionTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblTransactionType">
+          <Key>
+            <PropertyRef Name="TransactionTypeId" />
+          </Key>
+          <Property Name="TransactionTypeId" Type="int" Nullable="false" />
+          <Property Name="TransactionType" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_tblAccountType_tblBank">
+          <End Role="tblBank" Type="Self.tblBank" Multiplicity="0..1" />
+          <End Role="tblAccountType" Type="Self.tblAccountType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBank">
+              <PropertyRef Name="BankId" />
+            </Principal>
+            <Dependent Role="tblAccountType">
+              <PropertyRef Name="BankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerAccount_tblAccountType">
+          <End Role="tblAccountType" Type="Self.tblAccountType" Multiplicity="0..1" />
+          <End Role="tblCustomerAccount" Type="Self.tblCustomerAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccountType">
+              <PropertyRef Name="AccountTypeId" />
+            </Principal>
+            <Dependent Role="tblCustomerAccount">
+              <PropertyRef Name="AccountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerAccount_tblCustomer">
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="0..1" />
+          <End Role="tblCustomerAccount" Type="Self.tblCustomerAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="tblCustomerAccount">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTransaction_tblCustomerAccount">
+          <End Role="tblCustomerAccount" Type="Self.tblCustomerAccount" Multiplicity="0..1" />
+          <End Role="tblTransaction" Type="Self.tblTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomerAccount">
+              <PropertyRef Name="CustomerAccountId" />
+            </Principal>
+            <Dependent Role="tblTransaction">
+              <PropertyRef Name="CustomerAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTransaction_tblTransactionType">
+          <End Role="tblTransactionType" Type="Self.tblTransactionType" Multiplicity="0..1" />
+          <End Role="tblTransaction" Type="Self.tblTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransactionType">
+              <PropertyRef Name="TransactionTypeId" />
+            </Principal>
+            <Dependent Role="tblTransaction">
+              <PropertyRef Name="TransactionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="tblAccountType" EntityType="Self.tblAccountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBank" EntityType="Self.tblBank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustomer" EntityType="Self.tblCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustomerAccount" EntityType="Self.tblCustomerAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTransaction" EntityType="Self.tblTransaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTransactionType" EntityType="Self.tblTransactionType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblAccountType_tblBank" Association="Self.FK_tblAccountType_tblBank">
+            <End Role="tblBank" EntitySet="tblBank" />
+            <End Role="tblAccountType" EntitySet="tblAccountType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerAccount_tblAccountType" Association="Self.FK_tblCustomerAccount_tblAccountType">
+            <End Role="tblAccountType" EntitySet="tblAccountType" />
+            <End Role="tblCustomerAccount" EntitySet="tblCustomerAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerAccount_tblCustomer" Association="Self.FK_tblCustomerAccount_tblCustomer">
+            <End Role="tblCustomer" EntitySet="tblCustomer" />
+            <End Role="tblCustomerAccount" EntitySet="tblCustomerAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransaction_tblCustomerAccount" Association="Self.FK_tblTransaction_tblCustomerAccount">
+            <End Role="tblCustomerAccount" EntitySet="tblCustomerAccount" />
+            <End Role="tblTransaction" EntitySet="tblTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransaction_tblTransactionType" Association="Self.FK_tblTransaction_tblTransactionType">
+            <End Role="tblTransactionType" EntitySet="tblTransactionType" />
+            <End Role="tblTransaction" EntitySet="tblTransaction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAccountType">
+          <Key>
+            <PropertyRef Name="AccountTypeId" />
+          </Key>
+          <Property Name="AccountTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BankId" Type="Int32" />
+          <NavigationProperty Name="tblBank" Relationship="Self.FK_tblAccountType_tblBank" FromRole="tblAccountType" ToRole="tblBank" />
+          <NavigationProperty Name="tblCustomerAccounts" Relationship="Self.FK_tblCustomerAccount_tblAccountType" FromRole="tblAccountType" ToRole="tblCustomerAccount" />
+        </EntityType>
+        <EntityType Name="tblBank">
+          <Key>
+            <PropertyRef Name="BankId" />
+          </Key>
+          <Property Name="BankId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IFSC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblAccountTypes" Relationship="Self.FK_tblAccountType_tblBank" FromRole="tblBank" ToRole="tblAccountType" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="EmailId" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblCustomerAccounts" Relationship="Self.FK_tblCustomerAccount_tblCustomer" FromRole="tblCustomer" ToRole="tblCustomerAccount" />
+        </EntityType>
+        <EntityType Name="tblCustomerAccount">
+          <Key>
+            <PropertyRef Name="CustomerAccountId" />
+          </Key>
+          <Property Name="CustomerAccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="AccountTypeId" Type="Int32" />
+          <Property Name="JoinDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblAccountType" Relationship="Self.FK_tblCustomerAccount_tblAccountType" FromRole="tblCustomerAccount" ToRole="tblAccountType" />
+          <NavigationProperty Name="tblCustomer" Relationship="Self.FK_tblCustomerAccount_tblCustomer" FromRole="tblCustomerAccount" ToRole="tblCustomer" />
+          <NavigationProperty Name="tblTransactions" Relationship="Self.FK_tblTransaction_tblCustomerAccount" FromRole="tblCustomerAccount" ToRole="tblTransaction" />
+        </EntityType>
+        <EntityType Name="tblTransaction">
+          <Key>
+            <PropertyRef Name="TransationId" />
+          </Key>
+          <Property Name="TransationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerAccountId" Type="Int32" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="TransactionTypeId" Type="Int32" />
+          <NavigationProperty Name="tblCustomerAccount" Relationship="Self.FK_tblTransaction_tblCustomerAccount" FromRole="tblTransaction" ToRole="tblCustomerAccount" />
+          <NavigationProperty Name="tblTransactionType" Relationship="Self.FK_tblTransaction_tblTransactionType" FromRole="tblTransaction" ToRole="tblTransactionType" />
+        </EntityType>
+        <EntityType Name="tblTransactionType">
+          <Key>
+            <PropertyRef Name="TransactionTypeId" />
+          </Key>
+          <Property Name="TransactionTypeId" Type="Int32" Nullable="false" />
+          <Property Name="TransactionType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblTransactions" Relationship="Self.FK_tblTransaction_tblTransactionType" FromRole="tblTransactionType" ToRole="tblTransaction" />
+        </EntityType>
+        <Association Name="FK_tblAccountType_tblBank">
+          <End Role="tblBank" Type="Self.tblBank" Multiplicity="0..1" />
+          <End Role="tblAccountType" Type="Self.tblAccountType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBank">
+              <PropertyRef Name="BankId" />
+            </Principal>
+            <Dependent Role="tblAccountType">
+              <PropertyRef Name="BankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerAccount_tblAccountType">
+          <End Role="tblAccountType" Type="Self.tblAccountType" Multiplicity="0..1" />
+          <End Role="tblCustomerAccount" Type="Self.tblCustomerAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccountType">
+              <PropertyRef Name="AccountTypeId" />
+            </Principal>
+            <Dependent Role="tblCustomerAccount">
+              <PropertyRef Name="AccountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomerAccount_tblCustomer">
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="0..1" />
+          <End Role="tblCustomerAccount" Type="Self.tblCustomerAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="tblCustomerAccount">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTransaction_tblCustomerAccount">
+          <End Role="tblCustomerAccount" Type="Self.tblCustomerAccount" Multiplicity="0..1" />
+          <End Role="tblTransaction" Type="Self.tblTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomerAccount">
+              <PropertyRef Name="CustomerAccountId" />
+            </Principal>
+            <Dependent Role="tblTransaction">
+              <PropertyRef Name="CustomerAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTransaction_tblTransactionType">
+          <End Role="tblTransactionType" Type="Self.tblTransactionType" Multiplicity="0..1" />
+          <End Role="tblTransaction" Type="Self.tblTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransactionType">
+              <PropertyRef Name="TransactionTypeId" />
+            </Principal>
+            <Dependent Role="tblTransaction">
+              <PropertyRef Name="TransactionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BankTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAccountTypes" EntityType="Self.tblAccountType" />
+          <EntitySet Name="tblBanks" EntityType="Self.tblBank" />
+          <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
+          <EntitySet Name="tblCustomerAccounts" EntityType="Self.tblCustomerAccount" />
+          <EntitySet Name="tblTransactions" EntityType="Self.tblTransaction" />
+          <EntitySet Name="tblTransactionTypes" EntityType="Self.tblTransactionType" />
+          <AssociationSet Name="FK_tblAccountType_tblBank" Association="Self.FK_tblAccountType_tblBank">
+            <End Role="tblBank" EntitySet="tblBanks" />
+            <End Role="tblAccountType" EntitySet="tblAccountTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerAccount_tblAccountType" Association="Self.FK_tblCustomerAccount_tblAccountType">
+            <End Role="tblAccountType" EntitySet="tblAccountTypes" />
+            <End Role="tblCustomerAccount" EntitySet="tblCustomerAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomerAccount_tblCustomer" Association="Self.FK_tblCustomerAccount_tblCustomer">
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+            <End Role="tblCustomerAccount" EntitySet="tblCustomerAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransaction_tblCustomerAccount" Association="Self.FK_tblTransaction_tblCustomerAccount">
+            <End Role="tblCustomerAccount" EntitySet="tblCustomerAccounts" />
+            <End Role="tblTransaction" EntitySet="tblTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransaction_tblTransactionType" Association="Self.FK_tblTransaction_tblTransactionType">
+            <End Role="tblTransactionType" EntitySet="tblTransactionTypes" />
+            <End Role="tblTransaction" EntitySet="tblTransactions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="BankTestEntities">
+          <EntitySetMapping Name="tblAccountTypes">
+            <EntityTypeMapping TypeName="Models.tblAccountType">
+              <MappingFragment StoreEntitySet="tblAccountType">
+                <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBanks">
+            <EntityTypeMapping TypeName="Models.tblBank">
+              <MappingFragment StoreEntitySet="tblBank">
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IFSC" ColumnName="IFSC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustomers">
+            <EntityTypeMapping TypeName="Models.tblCustomer">
+              <MappingFragment StoreEntitySet="tblCustomer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustomerAccounts">
+            <EntityTypeMapping TypeName="Models.tblCustomerAccount">
+              <MappingFragment StoreEntitySet="tblCustomerAccount">
+                <ScalarProperty Name="CustomerAccountId" ColumnName="CustomerAccountId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTransactions">
+            <EntityTypeMapping TypeName="Models.tblTransaction">
+              <MappingFragment StoreEntitySet="tblTransaction">
+                <ScalarProperty Name="TransationId" ColumnName="TransationId" />
+                <ScalarProperty Name="CustomerAccountId" ColumnName="CustomerAccountId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTransactionTypes">
+            <EntityTypeMapping TypeName="Models.tblTransactionType">
+              <MappingFragment StoreEntitySet="tblTransactionType">
+                <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

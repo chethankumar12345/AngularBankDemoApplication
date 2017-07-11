@@ -1,0 +1,114 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/Login/LoginService.js"></script>
+    <script src="~/Scripts/Login/LoginController.js"></script>
+</head>
+<body style="padding-top:20px" ng-app="MyApp">
+<div class="col-md-10 col-md-offset-1" ng-controller="logincontroller">
+    <table class="table table-bordered table-striped table-condensed">
+    <tr>
+        <td>
+            <div class="well">
+                <table class="table table-bordered">
+                    <thead><tr class="success"><td colspan="2" style="font-weight: bold; font-size: 17px;">New User Registration</td></tr></thead>
+                    <tbody>
+                    <tr><td>Email</td><td><input type="text"  ng-model="userRegisterEmail" placeholder="Email"/></td></tr>
+                    <tr><td>Password</td><td><input type="password"  ng-model="userRegisterPassword" placeholder="Password"/></td></tr>
+                    <tr><td>Confirm Password</td><td><input type="password" ng-model="userRegisterConfirmPassword"  placeholder="ConfirmEmail"/></td></tr>
+                    <tr class="success"><td colspan="2"><input id="btnRegister" ng-click="registerUser()" class="btn btn-success" type="button" value="Register"/></td></tr>
+                    </tbody>
+                </table>
+                <div class="modal show" ng-show="divSuccess" tabindex="-1" id="successModal" ng-model="successModal" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" ng-click="CloseSuccessPopUp()" data-dismiss="modal">
+                                    &times;
+                                </button>
+                                <h4>success</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h2>Registration Successfull</h2>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" data-dismiss="modal" ng-click="CloseSuccessPopUp()"  class="btn btn-success">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="alert alert-danger" ng-show="divError">
+                    <a id="linkClose" class="close" href="#">&times;</a>
+                    <div  >{{divErrorText}}</div>
+                </div>
+            </div>
+        </td>
+
+        <td>
+            <div class="well">
+                <table class="table table-bordered table-striped table-condensed">
+                    <thead><tr class="success" style="font-weight: bold; font-size: 17px;"><td colspan="2">Login</td></tr></thead>
+                    <tbody>
+                    <tr>
+                        <td>Email:</td>
+                        <td>
+                            <input type="text" class="form-control"
+                                   ng-model="userLoginEmail"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td>
+                            <input type="password"
+                                   class="form-control"
+                                   ng-model="userLoginPassword"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" value="Login" class="form-control btn btn-success"
+                                   ng-click="login()"/>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <table class="table table-bordered table-striped table-condensed">
+                    <thead><tr class="success" style="font-weight: bold; font-size: 17px;"><td colspan="2">Login from Google</td></tr></thead>
+                    <tbody>
+               
+                    <tr>
+                        <td></td>
+                        <td style="text-align:center;">
+                            <input type="button" value="Login With Google" style="width: 200px;" class="form-control btn btn-success"
+                                   ng-click="googleLogin()"/>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+        </table>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
+</div>
+</body>
+</html>

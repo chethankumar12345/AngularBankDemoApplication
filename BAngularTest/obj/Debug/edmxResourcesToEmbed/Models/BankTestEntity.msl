@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="BankTestEntities">
+    <EntitySetMapping Name="tblAccountTypes">
+      <EntityTypeMapping TypeName="Models.tblAccountType">
+        <MappingFragment StoreEntitySet="tblAccountType">
+          <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+          <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBanks">
+      <EntityTypeMapping TypeName="Models.tblBank">
+        <MappingFragment StoreEntitySet="tblBank">
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IFSC" ColumnName="IFSC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCustomers">
+      <EntityTypeMapping TypeName="Models.tblCustomer">
+        <MappingFragment StoreEntitySet="tblCustomer">
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCustomerAccounts">
+      <EntityTypeMapping TypeName="Models.tblCustomerAccount">
+        <MappingFragment StoreEntitySet="tblCustomerAccount">
+          <ScalarProperty Name="CustomerAccountId" ColumnName="CustomerAccountId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+          <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTransactions">
+      <EntityTypeMapping TypeName="Models.tblTransaction">
+        <MappingFragment StoreEntitySet="tblTransaction">
+          <ScalarProperty Name="TransationId" ColumnName="TransationId" />
+          <ScalarProperty Name="CustomerAccountId" ColumnName="CustomerAccountId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+          <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTransactionTypes">
+      <EntityTypeMapping TypeName="Models.tblTransactionType">
+        <MappingFragment StoreEntitySet="tblTransactionType">
+          <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
+          <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

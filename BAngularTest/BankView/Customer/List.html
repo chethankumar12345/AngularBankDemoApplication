@@ -1,0 +1,18 @@
+﻿<br />
+<a href="#!/CustomerCreate" class="btn btn-primary btn-group-lg active" role="button">Create New</a>
+<br />
+<br />
+<div ng-controller="CustomerListController" class="table-responsive">
+    <table style="width:500px;" class="table">
+        <thead><tr><th>Id</th><th>Name</th><th style="width:130px;">Mobile Number</th><th>Email ID</th></tr></thead>
+        <tbody><tr ng-repeat="customer in Customers"><td>{{customer.CustomerId}}</td>
+            <td>{{customer.Name}}</td><td>{{customer.MobileNumber}}</td>
+            <td>{{customer.EmailId}}</td>
+
+
+            <td><a href="#!/CustomerEdit/Id={{customer.CustomerId}}" class="btn btn-primary btn-sm active" role="button">Edit</a></td>
+            <td><span class="pull-right" title="Delete customer"> <i ng-click="deleteAccountType($event, customer.CustomerId)" class="glyphicon glyphicon-trash"></i> </span> </td></tr></tbody>
+    </table>
+    {{Message}}
+</div>
+

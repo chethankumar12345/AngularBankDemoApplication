@@ -1,0 +1,42 @@
+﻿
+<div>Create</div>
+<br />
+<div ng-controller="CustomerCreateController">
+    <form novalidate role="form" name="frmCustomer">
+        <table style="width:400px;">
+            <tr>
+                <td>Enter Customer Name :</td>
+                <td>
+                    <input type="text" name="Name" class="form-control input-sm" ng-model="customer.Name" style="width:200px;" />
+                    <span class="help-inline" ng-hide="error.Name">Enter Customer Name</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Mobile  :</td>
+                <td>
+                    <input type="text" name="MobileNumber" class="form-control input-sm" ng-model="customer.MobileNumber" ng-pattern="/^[7-9][0-9]{9}$/" style="width:200px;"  only-digits />
+                    <span class="help-inline" ng-hide="error.MobileNumber">Enter Mobile Number</span>
+                    <span ng-show="frmCustomer.MobileNumber.$error.pattern">Please enter valid number!</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Email Id :</td>
+                <td>
+                    <input type="email" name="EmailId" class="form-control input-sm" ng-model="customer.EmailId" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" style="width:200px;"  />
+                    <span class="help-inline" ng-hide="error.EmailId">Enter Email Id</span>
+                    <span ng-show="frmCustomer.EmailId.$error.pattern">Please enter valid number!</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div style="margin-top:10px;">
+                        <input type="submit" class="btn btn-success" ng-click="Save()" value="Save" />
+                        <input type="button" class="btn" style="margin-left:10px;" ng-click="Cancel()" value="Cancel" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+        {{Message}}
+    </form>
+</div>

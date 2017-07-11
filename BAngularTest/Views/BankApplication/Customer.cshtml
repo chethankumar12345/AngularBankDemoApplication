@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Customer/CustomerRouteConfig.js"></script>
+<script src="~/Scripts/Customer/CustomerAccessor.js"></script>
+<script src="~/Scripts/Customer/CustomerControllers.js"></script>
+
+<h2>Customer</h2>
+
+
+<div ng-view></div>
+<div id="mydiv" data-ng-show="loading">
+    <img src="~/Images/ajax-loader.gif" class="ajax-loader" />
+</div>
