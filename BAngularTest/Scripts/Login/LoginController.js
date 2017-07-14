@@ -1,6 +1,13 @@
 ﻿
 
-app.controller('logincontroller', function ($scope, loginservice) {
+app.controller('logincontroller', function ($scope, $location, loginservice) {
+
+
+    if ($location.hash() !== '') {
+        console.log($location.hash().split('=')[1].split('&')[0]);
+        var accessToken = $location.hash().split('=')[1].split('&')[0];
+        loginservice.isUserRegistered(accessToken);
+    } 
 
     //Scope Declaration
     $scope.responseData = "";
@@ -76,7 +83,13 @@ app.controller('logincontroller', function ($scope, loginservice) {
         });
 
     };
-    $scope.googleLogin = function() {
-        window.location.href = '/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A53853%2FBankApplication%2FRegister&state=1AKFI1JeEVys4-8ohlVEY9tXmBZskjLxJmdOK0m4edY1';
+    $scope.googleLogin = function () {
+     
+        window.location.href = '/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A53853%2FBankApplication%2FRegister&state=OGV9nfOXlXI4fQBvArWZZbKiU9veyAXJf0th-vy5NGk1';
     };
+    $scope.faceBookLogin = function () {
+
+        window.location.href = '/api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A53853%2FBankApplication%2FRegister&state=ynOe6Brm9XD0Bjr_uQDbNTPIAUnP3FLy_h0gqDE4Lfo1';
+    };
+   
 });

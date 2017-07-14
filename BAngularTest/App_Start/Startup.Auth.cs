@@ -1,8 +1,10 @@
-﻿using BAngularTest.Models;
+﻿using BAngularTest.Facebook;
+using BAngularTest.Models;
 using BAngularTest.Providers;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
@@ -56,10 +58,20 @@ namespace BAngularTest
             //    appId: "",
             //    appSecret: "");
 
+            var facebookOptions = new FacebookAuthenticationOptions()
+            {
+                AppId = "1289628481136145",
+                AppSecret = "e18e90730e622ceae1ca24103ac5c8d8",
+                BackchannelHttpHandler = new FacebookBackChannelHandler(),
+                UserInformationEndpoint = "https://graph.facebook.com/v2.4/me?fields=id,email"
+            };
+            facebookOptions.Scope.Add("email");
+
+            app.UseFacebookAuthentication(facebookOptions);
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "978478139033-1a2ste9t4ou7req4pafoookqubt49pav.apps.googleusercontent.com",
-                ClientSecret = "c3QycZ52qIxxS5NDJLmpYH3K"
+                ClientId = "727025917904-m1tfva8636g0q00fbnessqrgidu0uilq.apps.googleusercontent.com",
+                ClientSecret = "-UbH_z6zprcbE0-rbzNoq9UM"
             });
         }
     }

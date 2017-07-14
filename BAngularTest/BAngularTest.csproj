@@ -245,6 +245,7 @@
     <Compile Include="Controllers\TransactionsDataController.cs" />
     <Compile Include="Controllers\TransactionTypesDataController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Facebook\FacebookBackChannelHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -369,6 +370,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Login\GoogleAuthentication.js" />
     <Content Include="Scripts\Login\LoginController.js" />
     <Content Include="Scripts\Login\LoginService.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
